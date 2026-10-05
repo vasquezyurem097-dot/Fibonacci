@@ -1,0 +1,76 @@
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    int matriz[10][10];
+    int i, j;
+    int filaInicio, filaFin, columnaInicio, columnaFin;
+    int a = 0, b = 1, siguiente;
+
+    printf("Ingresa el tamaño de la espiral (maximo 10): ");
+    scanf("%d", &n);
+
+    filaInicio = 0;
+    filaFin = n - 1;
+    columnaInicio = 0;
+    columnaFin = n - 1;
+
+    while(filaInicio <= filaFin && columnaInicio <= columnaFin)
+    {
+        for(j = columnaInicio; j <= columnaFin; j++)
+        {
+            matriz[filaInicio][j] = a;
+            siguiente = a + b;
+            a = b;
+            b = siguiente;
+        }
+        filaInicio++;
+
+        for(i = filaInicio; i <= filaFin; i++)
+        {
+            matriz[i][columnaFin] = a;
+            siguiente = a + b;
+            a = b;
+            b = siguiente;
+        }
+        columnaFin--;
+
+        if(filaInicio <= filaFin)
+        {
+            for(j = columnaFin; j >= columnaInicio; j--)
+            {
+                matriz[filaFin][j] = a;
+                siguiente = a + b;
+                a = b;
+                b = siguiente;
+            }
+            filaFin--;
+        }
+
+        if(columnaInicio <= columnaFin)
+        {
+            for(i = filaFin; i >= filaInicio; i--)
+            {
+                matriz[i][columnaInicio] = a;
+                siguiente = a + b;
+                a = b;
+                b = siguiente;
+            }
+            columnaInicio++;
+        }
+    }
+
+    printf("\nEspiral de Fibonacci:\n\n");
+
+    for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < n; j++)
+        {
+            printf("%8d", matriz[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
